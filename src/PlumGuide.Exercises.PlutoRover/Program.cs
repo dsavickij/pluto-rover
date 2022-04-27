@@ -15,7 +15,6 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddTransient<IRover, PlutoRover>();
 builder.Services.AddTransient<IMotionController, PlutoRoverMotionController>();
-builder.Services.AddTransient<PlutoRoverEndpointHandlers2>();
 
 builder.Services.AddDbContext<PlutoRoverDbContext>(opt => opt.UseSqlServer(
         builder.Configuration["DbConnectionString"],
@@ -23,7 +22,7 @@ builder.Services.AddDbContext<PlutoRoverDbContext>(opt => opt.UseSqlServer(
 
 builder.Services.AddHostedService<DataMigrationBackgroundWorker>();
 
-//builder.Services.AddControllers();
+// builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -40,12 +39,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+// app.UseAuthorization();
 
 app.UseRoverMiddlewares();
 
 app.AddPlutoRoverEndpoints();
 
-//app.MapControllers();
+// app.MapControllers();
 
 app.Run();

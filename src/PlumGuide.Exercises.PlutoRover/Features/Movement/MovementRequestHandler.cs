@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using PlumGuide.Exercises.PlutoRover.Common;
-using PlumGuide.Exercises.PlutoRover.DataAccess.Entities;
 using PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 using PlumGuide.Exercises.PlutoRover.SDK.DTOs;
 using PlumGuide.Exercises.PlutoRover.SDK.Result;
@@ -17,10 +16,12 @@ public class MovementRequestHandler : OperationResults, IRequestHandler<Movement
     {
         foreach (var command in GetParsedCommands(request.CommandSequence))
         {
-            await ExecuteMovementCommandAsync(command);
+            await _rover.MoveAsync(command);
         }
 
-        return Ok(await GetCurrentRoverPositionAsync());
+        var position = await GetCurrentRoverPositionAsync();
+
+        return Ok(position);
     }
 
     private async Task<PositionDTO> GetCurrentRoverPositionAsync()
@@ -43,17 +44,5 @@ public class MovementRequestHandler : OperationResults, IRequestHandler<Movement
                 ? command
                 : throw new ArgumentException($"Command '{(char)command}' is not valid");
         }
-    }
-
-    private async Task<Position> ExecuteMovementCommandAsync(MovementCommand command)
-    {
-        return command switch
-        {
-            MovementCommand.MoveForward => await _rover.MoveForwardAsync(),
-            MovementCommand.MoveBackward => await _rover.MoveBackwardAsync(),
-            MovementCommand.TurnLeft => await _rover.TurnLeftAsync(),
-            MovementCommand.TurnRight => await _rover.TurnRightAsync(),
-            _ => throw new ArgumentException($"Command '{command}' is not supoorted")
-        };
     }
 }

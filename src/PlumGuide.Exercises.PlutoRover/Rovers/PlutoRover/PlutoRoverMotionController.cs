@@ -22,7 +22,7 @@ public class PlutoRoverMotionController : IMotionController
             MovementCommand.MoveBackward => MoveBackwardAsync(),
             MovementCommand.TurnLeft => TurnLeftAsync(),
             MovementCommand.TurnRight => TurnRightAsync(),
-            _ => throw new NotImplementedException(),
+            _ => throw new ArgumentException($"Command '{command}' is not supoorted")
         };
 
         return await motion;
