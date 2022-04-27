@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+    plutoroverdb:
+        container_name: plutoroverdb
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=aDmin1234
+        restart: always
+        ports:
+            - "1500:1433"
+
+    plumguide.exercises.plutorover:
+        container_name: plumguide.exercises.plutorover
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+            - DbConnectionString=Server=plutoroverdb;Database=PlutoRoverDb;User Id=sa;Password=aDmin1234;
+        depends_on:
+            - plutoroverdb
+        ports:
+            - "80"
+            - "443"
+        volumes:
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+    plutoroverdb:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+
+    plumguide.exercises.plutorover:
+        image: ${DOCKER_REGISTRY-}plumguideexercisesplutorover
+        build:
+            context: .
+            dockerfile: PlumGuide.Exercises.PlutoRover/Dockerfile
