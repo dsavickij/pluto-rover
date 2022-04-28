@@ -25,7 +25,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -54,7 +54,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -83,7 +83,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -112,7 +112,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -141,7 +141,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -170,7 +170,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -201,7 +201,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveForwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveForward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -231,7 +231,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.MoveBackwardAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.MoveBackward))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -261,7 +261,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.TurnLeftAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.TurnLeft))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -291,7 +291,7 @@ public class MovementRequestHandlerTests
 
         var position = _fixture.Create<Position>();
 
-        rover.Setup(x => x.TurnRightAsync())
+        rover.Setup(x => x.MoveAsync(MovementCommand.TurnRight))
             .ReturnsAsync(position)
             .Verifiable();
 
@@ -322,14 +322,14 @@ public class MovementRequestHandlerTests
         var position = _fixture.Create<Position>();
 
         var commandExecutionSequence = new MockSequence();
-        
+
         rover.InSequence(commandExecutionSequence)
-            .Setup(x => x.TurnRightAsync())
+            .Setup(x => x.MoveAsync(MovementCommand.TurnRight))
             .ReturnsAsync(position)
             .Verifiable();
 
         rover.InSequence(commandExecutionSequence)
-            .Setup(x => x.TurnLeftAsync())
+            .Setup(x => x.MoveAsync(MovementCommand.TurnLeft))
             .ReturnsAsync(position)
             .Verifiable();
 

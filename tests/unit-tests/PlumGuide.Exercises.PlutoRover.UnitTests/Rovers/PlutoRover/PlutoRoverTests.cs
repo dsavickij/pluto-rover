@@ -1,7 +1,9 @@
-﻿using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoFixture;
+using FluentAssertions;
+using Moq;
 using PlumGuide.Exercises.PlutoRover.DataAccess.Entities;
-using System;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
+using PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 using System.Threading.Tasks;
 using Xunit;
 using Rover = PlumGuide.Exercises.PlutoRover.Rovers.PlutoRover.PlutoRover;
@@ -10,107 +12,123 @@ namespace PlumGuide.Exercises.PlutoRover.UnitTests.Rovers.PlutoRover;
 
 public class PlutoRoverTests
 {
+    private Fixture _fixture = new();
+
     [Fact]
     public async Task When_GetPositionAsyncIsCalled_Then_RoverCurrentPositionIsReturned()
     {
         // Arrange
-        var currentPosition = new Position(Guid.NewGuid(), 0, 0, Direction.North);
+        var motionController = new Mock<IMotionController>();
 
-        var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+        var currentPosition = _fixture.Create<Position>();
+
+        using var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
 
         await dbContext.Positions.AddAsync(currentPosition);
         await dbContext.SaveChangesAsync();
 
-        var sut = new Rover(dbContext);
+        var sut = new Rover(dbContext, motionController.Object);
 
         // Act
         var position = await sut.GetPositionAsync();
 
         // Assert
-        position.Should().Be(position);
+        position.Should().Be(currentPosition);
     }
 
-    [Theory]
-    [MemberData(nameof(PlutoRoverMovementTestData.GetMoveForwardTestData), MemberType = typeof(PlutoRoverMovementTestData))]
-    public async Task When_MoveForwardIsCalled_Then_RoverMovesForwardByOneUnit(Position startPosition, Position afterMovePosition)
+    [Fact]
+    public async Task When_MoveForwardIsCalled_Then_MotionControllerExecutesMoveForwardCommand()
     {
         // Arrange
-        var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+        var position = _fixture.Create<Position>();
 
-        await dbContext.Positions.AddAsync(startPosition);
-        await dbContext.SaveChangesAsync();
+        var motionController = new Mock<IMotionController>();
 
-        dbContext.Entry(startPosition).State = EntityState.Detached;
+        motionController
+            .Setup(x => x.ExecuteAsync(MovementCommand.MoveForward))
+            .ReturnsAsync(position)
+            .Verifiable();
 
-        var sut = new Rover(dbContext);
+        using var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+
+        var sut = new Rover(dbContext, motionController.Object);
 
         // Act
-        var position = await sut.MoveForwardAsync();
+        await sut.MoveAsync(MovementCommand.MoveForward);
 
         // Assert
-        position.Should().Be(afterMovePosition);
+        motionController.Verify();
     }
 
-    [Theory]
-    [MemberData(nameof(PlutoRoverMovementTestData.GetMoveBackwardTestData), MemberType = typeof(PlutoRoverMovementTestData))]
-    public async Task When_MoveBackwardIsCalled_Then_RoverMovesBackwardByOneUnit(Position startPosition, Position afterMovePosition)
+    [Fact]
+    public async Task When_MoveBackwardIsCalled_Then_MotionControllerExecutesMoveBackwardCommand()
     {
         // Arrange
-        var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+        var position = _fixture.Create<Position>();
 
-        await dbContext.Positions.AddAsync(startPosition);
-        await dbContext.SaveChangesAsync();
+        var motionController = new Mock<IMotionController>();
 
-        dbContext.Entry(startPosition).State = EntityState.Detached;
+        motionController
+            .Setup(x => x.ExecuteAsync(MovementCommand.MoveBackward))
+            .ReturnsAsync(position)
+            .Verifiable();
 
-        var sut = new Rover(dbContext);
+        using var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+
+        var sut = new Rover(dbContext, motionController.Object);
 
         // Act
-        var position = await sut.MoveBackwardAsync();
+        await sut.MoveAsync(MovementCommand.MoveBackward);
 
         // Assert
-        position.Should().Be(afterMovePosition);
+        motionController.Verify();
     }
 
-    [Theory]
-    [MemberData(nameof(PlutoRoverMovementTestData.GetTurnLeftTestData), MemberType = typeof(PlutoRoverMovementTestData))]
-    public async Task When_TurnLeftIsCalled_Then_RoverTurnsLeft(Position startPosition, Position afterMovePosition)
+    [Fact]
+    public async Task When_TurnLeftIsCalled_Then_MotionControllerExecutesTurnLeftCommand()
     {
         // Arrange
-        var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+        var position = _fixture.Create<Position>();
 
-        await dbContext.Positions.AddAsync(startPosition);
-        await dbContext.SaveChangesAsync();
+        var motionController = new Mock<IMotionController>();
 
-        dbContext.Entry(startPosition).State = EntityState.Detached;
+        motionController
+            .Setup(x => x.ExecuteAsync(MovementCommand.TurnLeft))
+            .ReturnsAsync(position)
+            .Verifiable();
 
-        var sut = new Rover(dbContext);
+        using var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+
+        var sut = new Rover(dbContext, motionController.Object);
 
         // Act
-        var position = await sut.TurnLeftAsync();
+        await sut.MoveAsync(MovementCommand.TurnLeft);
 
         // Assert
-        position.Should().Be(afterMovePosition);
+        motionController.Verify();
     }
 
-    [Theory]
-    [MemberData(nameof(PlutoRoverMovementTestData.GetTurnRightTestData), MemberType = typeof(PlutoRoverMovementTestData))]
-    public async Task When_TurnRightIsCalled_Then_RoverTurnsRightLeft(Position startPosition, Position afterMovePosition)
+    [Fact]
+    public async Task When_TurnRightIsCalled_Then_MotionControllerExecutesTurnRightCommand()
     {
         // Arrange
-        var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+        var position = _fixture.Create<Position>();
 
-        await dbContext.Positions.AddAsync(startPosition);
-        await dbContext.SaveChangesAsync();
+        var motionController = new Mock<IMotionController>();
 
-        dbContext.Entry(startPosition).State = EntityState.Detached;
+        motionController
+            .Setup(x => x.ExecuteAsync(MovementCommand.TurnRight))
+            .ReturnsAsync(position)
+            .Verifiable();
 
-        var sut = new Rover(dbContext);
+        using var dbContext = InMemoryPlutoRoverDbContextProvider.GetInstance();
+
+        var sut = new Rover(dbContext, motionController.Object);
 
         // Act
-        var position = await sut.TurnRightAsync();
+        await sut.MoveAsync(MovementCommand.TurnRight);
 
         // Assert
-        position.Should().Be(afterMovePosition);
+        motionController.Verify();
     }
 }
