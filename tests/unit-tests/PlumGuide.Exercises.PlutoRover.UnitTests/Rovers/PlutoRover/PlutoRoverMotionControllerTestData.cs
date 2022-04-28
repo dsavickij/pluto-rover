@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PlumGuide.Exercises.PlutoRover.UnitTests.Rovers.PlutoRover;
 
-public class PlutoRoverMovementTestData
+public class PlutoRoverMotionControllerTestData
 {
     static Guid _positionId = new ("9ec8c794-fc28-4b5e-aae5-abe23e001a3a");
 

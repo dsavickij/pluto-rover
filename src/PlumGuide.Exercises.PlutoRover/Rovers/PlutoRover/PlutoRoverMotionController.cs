@@ -28,7 +28,7 @@ public class PlutoRoverMotionController : IMotionController
         return await motion;
     }
 
-    public async Task<Position> MoveBackwardAsync()
+    private async Task<Position> MoveBackwardAsync()
     {
         var p = await GetCurrentPositionAsync();
 
@@ -46,7 +46,7 @@ public class PlutoRoverMotionController : IMotionController
         return newPosition;
     }
 
-    public async Task<Position> MoveForwardAsync()
+    private async Task<Position> MoveForwardAsync()
     {
         var p = await GetCurrentPositionAsync();
 
@@ -64,7 +64,7 @@ public class PlutoRoverMotionController : IMotionController
         return newPosition;
     }
 
-    public async Task<Position> TurnLeftAsync()
+    private async Task<Position> TurnLeftAsync()
     {
         var p = await GetCurrentPositionAsync();
 
@@ -82,7 +82,7 @@ public class PlutoRoverMotionController : IMotionController
         return newPosition;
     }
 
-    public async Task<Position> TurnRightAsync()
+    private async Task<Position> TurnRightAsync()
     {
         var p = await GetCurrentPositionAsync();
 
