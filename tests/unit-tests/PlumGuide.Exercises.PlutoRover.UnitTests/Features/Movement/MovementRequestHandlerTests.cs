@@ -2,7 +2,7 @@ using AutoFixture;
 using FluentAssertions;
 using Moq;
 using PlumGuide.Exercises.PlutoRover.DataAccess.Entities;
-using PlumGuide.Exercises.PlutoRover.Features.Movement;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 using PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 using PlumGuide.Exercises.PlutoRover.SDK.DTOs;
 using PlumGuide.Exercises.PlutoRover.SDK.Result;

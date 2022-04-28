@@ -12,6 +12,6 @@ public static class PlutoRoverEndpointExtensions
 
     public static void AddPlutoRoverEndpoints(this WebApplication app)
     {
-        app.MapPost($"{ROUTE_PREFIX}/move", _handlers.MovementAsync).WithTags(ENDPOINT_GROUP);
+        app.MapPost($"{ROUTE_PREFIX}/move", _handlers.MoveAsync).WithTags(ENDPOINT_GROUP);
     }
 }

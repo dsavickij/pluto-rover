@@ -1,5 +1,5 @@
 ﻿using PlumGuide.Exercises.PlutoRover.DataAccess.Entities;
-using PlumGuide.Exercises.PlutoRover.Features.Movement;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 
 namespace PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 

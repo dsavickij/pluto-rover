@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PlumGuide.Exercises.PlutoRover.Features.Movement;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 using PlumGuide.Exercises.PlutoRover.SDK.DTOs;
 using PlumGuide.Exercises.PlutoRover.SDK.Result;
 

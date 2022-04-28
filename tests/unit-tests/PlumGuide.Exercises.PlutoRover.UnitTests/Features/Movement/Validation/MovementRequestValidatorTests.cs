@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using PlumGuide.Exercises.PlutoRover.Features.Movement;
-using PlumGuide.Exercises.PlutoRover.Features.Movement.Validation;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement.Validation;
 using System.Linq;
 using Xunit;
 

@@ -4,7 +4,7 @@ using PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 using PlumGuide.Exercises.PlutoRover.SDK.DTOs;
 using PlumGuide.Exercises.PlutoRover.SDK.Result;
 
-namespace PlumGuide.Exercises.PlutoRover.Features.Movement;
+namespace PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 
 public class MovementRequestHandler : OperationResults, IRequestHandler<MovementRequest, OperationResult<PositionDTO>>
 {

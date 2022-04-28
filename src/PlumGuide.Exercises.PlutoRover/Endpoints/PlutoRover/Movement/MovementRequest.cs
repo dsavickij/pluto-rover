@@ -3,7 +3,7 @@ using MediatR;
 using PlumGuide.Exercises.PlutoRover.SDK.DTOs;
 using PlumGuide.Exercises.PlutoRover.SDK.Result;
 
-namespace PlumGuide.Exercises.PlutoRover.Features.Movement;
+namespace PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 
 [ExcludeFromCodeCoverage]
 public class MovementRequest : IRequest<OperationResult<PositionDTO>>

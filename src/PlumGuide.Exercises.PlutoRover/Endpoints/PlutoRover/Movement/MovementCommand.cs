@@ -1,4 +1,4 @@
-﻿namespace PlumGuide.Exercises.PlutoRover.Features.Movement;
+﻿namespace PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 
 public enum MovementCommand
 {

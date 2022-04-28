@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 
-namespace PlumGuide.Exercises.PlutoRover.Features.Movement.Validation;
+namespace PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement.Validation;
 
 public class MovementRequestValidator : AbstractValidator<MovementRequest>
 {

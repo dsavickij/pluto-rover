@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlumGuide.Exercises.PlutoRover.DataAccess;
 using PlumGuide.Exercises.PlutoRover.DataAccess.Entities;
-using PlumGuide.Exercises.PlutoRover.Features.Movement;
+using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement;
 using PlumGuide.Exercises.PlutoRover.Rovers.Abstractions;
 
 namespace PlumGuide.Exercises.PlutoRover.Rovers.PlutoRover;
