@@ -22,8 +22,6 @@ builder.Services.AddDbContext<PlutoRoverDbContext>(opt => opt.UseSqlServer(
 
 builder.Services.AddHostedService<DataMigrationBackgroundWorker>();
 
-// builder.Services.AddControllers();
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,12 +37,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// app.UseAuthorization();
-
 app.UseRoverMiddlewares();
 
 app.AddPlutoRoverEndpoints();
-
-// app.MapControllers();
 
 app.Run();
