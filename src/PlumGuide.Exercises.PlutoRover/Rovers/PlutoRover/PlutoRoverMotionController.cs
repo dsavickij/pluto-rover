@@ -40,7 +40,6 @@ public class PlutoRoverMotionController : IMotionController
             Direction.South => p with { Y = p.Y is PlutoGrid.YMax ? PlutoGrid.YMin : p.Y + MovementIncrementSize },
             _ => throw new ArgumentException($"Direction '{p.Direction}' is not supported")
         };
-
         await SetPositionAsync(newPosition);
 
         return newPosition;
