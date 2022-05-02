@@ -4,7 +4,7 @@ using PlumGuide.Exercises.PlutoRover.Endpoints.PlutoRover.Movement.Validation;
 using System.Linq;
 using Xunit;
 
-namespace PlumGuide.Exercises.PlutoRover.UnitTests.Features.Movement.Validation;
+namespace PlumGuide.Exercises.PlutoRover.UnitTests.Endpoints.PlutoRover.Movement.Validation;
 
 public class MovementRequestValidatorTests
 {
@@ -19,7 +19,7 @@ public class MovementRequestValidatorTests
 
         // Act
         var result = sut.Validate(request);
-        
+
         // Assert
         result.IsValid.Should().BeTrue();
     }

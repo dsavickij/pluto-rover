@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PlumGuide.Exercises.PlutoRover.UnitTests;
+namespace PlumGuide.Exercises.PlutoRover.UnitTests.Endpoints.PlutoRover.Movement;
 
 public class MovementRequestHandlerTests
 {
